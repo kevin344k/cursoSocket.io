@@ -2,7 +2,7 @@ const express=require("express")
 const {createServer}=require("http")
 const {Server}=require("socket.io")
 const path=require("path")
-
+const port=process.env.PORT || 3000
 
 
 const app=express()
@@ -18,8 +18,14 @@ app.get("/",(req,res)=>{
 
 
 io.on("connection",socket=>{
-  console.log(socket)
+ // console.log(socket.id)
+ // console.log("clientes conectdos :", io.engine.clientsCount)
+
+
+
+
+  
 })
 
 
-httpServer.listen(3000)
+httpServer.listen(port)
