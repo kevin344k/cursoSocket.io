@@ -24,8 +24,24 @@ io.on("connection",socket=>{
 /*socket.on("disconnect",()=>{
   
   console.log("El socket "+ socket.id+ "se ha desconectado")
-})*/
+})
+socket.conn.once("upgrade",()=>{
+  console.log("hemos pasado de HTTP Long-Polling a ",socket.conn.transport.name)
+})
+*/
 
+//emision basica
+
+  socket.emit("welcome","Ahora estas conectado 😎.")
+
+socket.on("server",data=>{
+  console.log(data)
+})
+
+  //emision a todos
+
+  io.emit("everyone","El cliente : "+socket.id+"se ha conectado 👀")
+  
 })
 
 
