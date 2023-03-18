@@ -1,21 +1,29 @@
- const socket=io()
+const socket = io()
 
-  socket.on("welcome",data=>{
-    console.log(data)
-    text.textContent=data
-  })
+socket.on("welcome", data => {
+  console.log(data)
+  text.textContent = data
+})
 
-const emitToServer=document.querySelector("#emit-to-server")
+const emitToServer = document.querySelector("#emit-to-server")
 
-  emitToServer.addEventListener("click",()=>{
-    socket.emit("server","Hola servidor 👀")
-  })
+emitToServer.addEventListener("click", () => {
+  socket.emit("server", "Hola servidor 👀")
+})
 
-socket.on("everyone",data=>{
+socket.on("everyone", data => {
   console.log(data)
 })
 
+const emitToLast = document.querySelector("#emit-to-last")
 
+emitToLast.addEventListener("click", () => {
+  socket.emit("last", "hola 👍")
+})
+
+socket.on("salute", message => {
+console.log(message)
+})
 /*
 function checkSocketStatus(){
   console.log("Estado del socket : ",socket.connected)

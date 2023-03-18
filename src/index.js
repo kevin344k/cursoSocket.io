@@ -8,6 +8,7 @@ const port=process.env.PORT || 3000
 const app=express()
 const httpServer=createServer(app)
 const io=new Server(httpServer)
+const socketsOnline=[]
 
 
 app.use(express.static(path.join(__dirname,"views")))
@@ -32,6 +33,8 @@ socket.conn.once("upgrade",()=>{
 
 //emision basica
 
+  socketsOnline.push(socket.id)
+  console.log(socketsOnline)
   socket.emit("welcome","Ahora estas conectado 😎.")
 
 socket.on("server",data=>{
@@ -41,6 +44,15 @@ socket.on("server",data=>{
   //emision a todos
 
   io.emit("everyone","El cliente : "+socket.id+"se ha conectado 👀")
+
+  //emision a uno solo
+
+  socket.on("last",message=>{
+    const lastSocket=socketsOnline[socketsOnline.length-1]
+
+    io.to(lastSocket).emit("salute",message)
+    
+  })
   
 })
 
