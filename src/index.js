@@ -21,10 +21,11 @@ io.on("connection",socket=>{
  // console.log(socket.id)
  // console.log("clientes conectdos :", io.engine.clientsCount)
 
-
-
-
+/*socket.on("disconnect",()=>{
   
+  console.log("El socket "+ socket.id+ "se ha desconectado")
+})*/
+
 })
 
 
