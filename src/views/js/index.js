@@ -11,10 +11,10 @@ connectRoom1.addEventListener("click",()=>{
   socket.emit("connect to room","room1")
 })
 connectRoom2.addEventListener("click",()=>{
-  socket.emit("connect to room","room1")
+  socket.emit("connect to room","room2")
 })
 connectRoom3.addEventListener("click",()=>{
-  socket.emit("connect to room","room1")
+  socket.emit("connect to room","room3")
 })
 
 

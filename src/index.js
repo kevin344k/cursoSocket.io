@@ -23,6 +23,7 @@ io.on("connection",socket=>{
 socket.connectionRoom=""
   
 socket.on("connect to room",room=>{
+  socket.leave(socket.connectionRoom)
   switch(room){
     case "room1":
       socket.join("room1")
