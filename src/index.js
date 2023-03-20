@@ -20,33 +20,7 @@ app.get("/",(req,res)=>{
 
 io.on("connection",socket=>{
 
-socket.connectionRoom=""
-  
-socket.on("connect to room",room=>{
-  socket.leave(socket.connectionRoom)
-  switch(room){
-    case "room1":
-      socket.join("room1")
-      socket.connectionRoom="room1"
-      break;
-          case "room2":
-      socket.join("room2")
-      socket.connectionRoom="room2"
-      break;
-          case "room3":
-      socket.join("room3")
-      socket.connectionRoom="room3"
-      break;
-  }
-})
-  
-})
-socket.on("message",message=>{
-  const room=socket.connectionRoom
-  io.to(room).emit("send message",{
-    message.
-    room
-  })
+
 })
 
 httpServer.listen(port)
