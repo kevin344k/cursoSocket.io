@@ -1,115 +1,37 @@
 
-
 const socket = io()
+//selecciona los botones que ,me permitiran conectarme a las salas 
+const connectRoom1=document.querySelector("#connectRoom1")
+const connectRoom2=document.querySelector("#connectRoom2")
+const connectRoom3=document.querySelector("#connectRoom3")
 
+//eventos para que al hacer click me conecte a las salas
 
-const circle=document.querySelector("#circle")
-
-const drawCircle=position=>{
-      circle.style.top=position.top
-    circle.style.left=position.left
-}
-
-const drag=e=>{
-
-
-const position={
-    top: e.clientY+"px",
-  left:e.clientX+"px"
-}
-drawCircle(position)
-socket.emit("circle position",position)
-  
- // circle.style.top=clientY+"px"
- //   circle.style.left=clientX+"px"
-
-}
-
-circle.addEventListener("mousedown",e=>{
-  document.addEventListener("mousemove",drag)
+connectRoom1.addEventListener("click",()=>{
+  socket.emit("connect to room","room1")
+})
+connectRoom2.addEventListener("click",()=>{
+  socket.emit("connect to room","room1")
+})
+connectRoom3.addEventListener("click",()=>{
+  socket.emit("connect to room","room1")
 })
 
 
-document.addEventListener("mouseup",e=>{
-  document.removeEventListener("mousemove",drag)
+//Enviar mensaje
+const sendMessage=document.querySelector("#sendMessage")
+sendMessage.addEventListener("click",()=>{
+  const message=prompt("Escribe tu mensaje:")
+  socket.emit("message",message)
 })
 
+//recibir el mensaje
 
-socket.on("move circle",position=>{
-drawCircle(position)
+socket.on("send message",data=>{
+  const {room}=data;
+    const {message}=data;
+
+  const li=document.createElement("li")
+  li.textContent=message
+  document.querySelector(`#${room}`).append(li)
 })
-
-/*
-socket.on("welcome", data => {
-  console.log(data)
-  text.textContent = data
-})
-
-const emitToServer = document.querySelector("#emit-to-server")
-
-emitToServer.addEventListener("click", () => {
-  socket.emit("server", "Hola servidor 👀")
-})
-
-socket.on("everyone", data => {
-  console.log(data)
-})
-
-const emitToLast = document.querySelector("#emit-to-last")
-
-emitToLast.addEventListener("click", () => {
-  socket.emit("last", "hola 👍")
-})
-
-socket.on("salute", message => {
-console.log(message)
-})
-/*
-function checkSocketStatus(){
-  console.log("Estado del socket : ",socket.connected)
-}
-
-
-
-socket.on("connect",()=>{
-  console.log("el socket se ha conectado",socket.id)
-  checkSocketStatus()
-})
-
-socket.on("connect_error",()=>{
-  console.log("no me he posido conectar 😥")
-})
-socket.on("disconnect",()=>{
-  console.log("el socket se ha desconectado", socket.id)
-  checkSocketStatus()
-})
-
-socket.io.on("reconnect_attempt",()=>{
-  console.log("Estoy intentando reconectarme 🍔 ")
-})
-
-socket.io.on("reconnect",()=>{
-  console.log("Me he vuelto a conectar 🍗 ")
-})
-*/
-
-
-//on,once y off
-/*
-socket.on("on",()=>{
-  console.log("se emite varias veces")
-})
-socket.once("once",()=>{
-  console.log("se emite una sola vez")
-})
-
-const listener= () => {
-  console.log("se apaga el evento")
-}
-
-socket.on("off",listener)
-
-setTimeout(()=>{
-  socket.off("off",listener)
-},2000)
-*/
