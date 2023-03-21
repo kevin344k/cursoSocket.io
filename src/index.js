@@ -17,10 +17,11 @@ app.get("/",(req,res)=>{
   res.sendFile(__dirname+"views/index.html")
 })
 
-
 io.on("connection",socket=>{
+  socket.on("is connected",msg=>{
+    console.log(msg)
+  })
+    })
 
-
-})
 
 httpServer.listen(port)
