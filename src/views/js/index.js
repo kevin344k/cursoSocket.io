@@ -18,11 +18,11 @@ const position={
   left:e.clientX+"px"
 }
 drawCircle(position)
-socket.emit("circle position",position)
+socket.volatile.emit("circle position",position)
   
  // circle.style.top=clientY+"px"
  //   circle.style.left=clientX+"px"
-
+console.log("se envia la posicion")
 }
 
 circle.addEventListener("mousedown",e=>{
