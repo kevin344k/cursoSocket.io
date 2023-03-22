@@ -17,10 +17,32 @@ app.get("/",(req,res)=>{
   res.sendFile(__dirname+"views/index.html")
 })
 
+//middleware para determinar si esta autenticado o no 
+io.use((socket,next)=>{
+  const token=socket.handshake.auth.token
+
+  if(token=="Mr. Michi es genial"){
+    next()
+  }
+  else{
+    const err=new Error("No puedes pasar ")
+    err.data={
+      details:"no pudiste ser autenticado"
+    }
+    console.log(err)
+    next(err)
+  }
+})
+
+
+io.use((socket,next)=>{
+  next()
+})
 
 io.on("connection",socket=>{
 //Broadcast de eventos
 
+  console.log(socket.id)
 
 })
 
